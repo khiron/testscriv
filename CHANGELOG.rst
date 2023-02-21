@@ -1,6 +1,4 @@
 
-.. _changelog-beta version:
-
 beta version — 2023-02-21
 =========================
 
@@ -9,8 +7,6 @@ beta version — 2023-02-21
 
 Added
 - orbit burn
-
-.. _changelog-beta version:
 
 beta version — 2023-02-21
 =========================
@@ -26,8 +22,6 @@ Added
 
 Added
 - max Q
-
-.. _changelog-alpha version:
 
 alpha version — 2023-02-21
 ==========================

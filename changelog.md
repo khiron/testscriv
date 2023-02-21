@@ -1,5 +1,5 @@
-
 <a id='changelog-0.0.1'></a>
+
 # Changes since release 0.0.1
 
 ## ENH
@@ -9,6 +9,7 @@
 ## Added
 
 - Added Title template to the project.
+    - Added changelog.d directory to the project.
 - Added Readme.md to the project
 - Added scriv.ini to the project
 - src directory

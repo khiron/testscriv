@@ -1,4 +1,11 @@
 
+<a id='changelog-0.0.3'></a>
+# Changes since release 0.0.3
+
+## DOC
+
+- some comment $\sigma$ $\rightarrow$ Seven minutes of terror. ${1\over n} \Sigma_{i=0}^n{x_i}$ is just one statistic
+
 <a id='changelog-change to TOML'></a>
 # Changes since release change to TOML
 

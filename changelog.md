@@ -6,7 +6,9 @@
 
 -  $\rightarrow$ Seven minutes of terror. ${1\over n} \Sigma_{i=0}^n{x_i}$ is just one statistic
 
--->
+
+## Extempraneous comment
+Added to ensure that any formatting of a previous change log persists.
 
 <a id='changelog-survivable'></a>
 # Changes since release survivable

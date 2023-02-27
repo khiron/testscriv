@@ -8,7 +8,7 @@ scriv create --edit
 ``` 
 to create a change entry 
 
-This will create a file with the correct name and format and commented out sample categories, and load it into your .git editor
+This will create a file with the correct name and format and commented out sample categories, and load it into your .git editor (the one specified by ```git config --global core.editor``` )
 
 Uncomment the category of change you are making and add a short description of the
 change as a markdown bullet point.  For example:

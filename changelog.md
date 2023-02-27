@@ -1,4 +1,11 @@
 
+<a id='changelog-0.0.2'></a>
+# Changes since release 0.0.2
+
+## DOC
+
+- A change to make sure that extemporaneous code is not overwritten
+
 <a id='changelog-stats'></a>
 # Changes since release stats
 

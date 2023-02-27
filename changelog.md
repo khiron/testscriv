@@ -1,4 +1,11 @@
 
+<a id='changelog-change to TOML'></a>
+# Changes since release change to TOML
+
+## ENH
+
+- changed from ini files to toml files
+
 <a id='changelog-0.0.2'></a>
 # Changes since release 0.0.2
 

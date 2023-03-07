@@ -1,6 +1,22 @@
 
+<a id='changelog-0.0.4'></a>
+# Changes since release 0.0.4
+
+## Contributers
+
+- Gavin Huttley
+
+## ENH
+
+- Added a feature from Gavin Huttley
+
+
 <a id='changelog-0.0.3'></a>
 # Changes since release 0.0.3
+
+## Contributers
+
+- @khiron
 
 ## DOC
 

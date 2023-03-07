@@ -1,5 +1,3 @@
-
-
 print("ignition")
 print("combustion")
 print("launch")

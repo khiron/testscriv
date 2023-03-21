@@ -4,9 +4,6 @@
 python -m venv pre-commit-env
 
 # activate the venv
-:<<BATCH
-    source pre-commit-env/bin/activate
-BATCH
 call pre-commit-env/Scripts/activate.bat
 
 # install the pinned version of black if needed

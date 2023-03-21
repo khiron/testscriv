@@ -1,8 +1,0 @@
-#!/bin/sh
-
-source ./env/Scripts/activate
-black .
-isort .
-
-#echo "Black and isort ran successfully"
-#exit 0

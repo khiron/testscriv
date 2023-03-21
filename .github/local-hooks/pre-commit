@@ -4,7 +4,7 @@
 python -m venv pre-commit-env
 
 # activate the venv
-call pre-commit-env/Scripts/activate.bat
+source pre-commit-env/bin/activate.bat
 
 # install the pinned version of black if needed
 pip install click==8.0.2

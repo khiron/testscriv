@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# create a pre-commit virtual environment if it doesn't exist
+python -m venv pre-commit-env
+
+# activate the venv
+source pre-commit-env/bin/activate
+
+# install the pinned version of black if needed
+pip install click==8.0.2
+pip install black==21.12b0
+python -m black .
+
+pip install  isort==5.10.1
+python -m isort .
+### end ###

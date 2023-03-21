@@ -6,19 +6,21 @@ To install hooks in this folder into your .git, run the following command from t
 git config core.hooksPath .github/local-hooks
 ```
 
-On windows change the line
-```
-source pre-commit-env/bin/activate.bat
-```
-to 
-```
-pre-commit-env\Scripts\activate.bat
-```
+# Linting 
 
-And on linux make the files executable using 
+This will ensure that before every commit Black is run to format the code and ISort is run to sort the imports using the project pinned versions of Black and ISort.
+
+## Windows 
+
+On windows copy the file ./.github/local-hooks/pre-commit.windows to **./.github/local-hooks/pre-commit.** 
+
+## Linux
+
+And on linux copy the file ./.github/local-hooks/pre-commit.linux to **./.github/local-hooks/pre-commit.** 
+
+And make the files executable using 
 
 ```
 chmod +x pre-commit
 ```
 
-This will ensure that before every commit Black is run to format the code and ISort is run to sort the imports using the project pinned versions of Black and ISort.

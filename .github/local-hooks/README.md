@@ -6,6 +6,15 @@ To install hooks in this folder into your .git, run the following command from t
 git config core.hooksPath .github/local-hooks
 ```
 
+On windows change the line
+```
+source pre-commit-env/bin/activate.bat
+```
+to 
+```
+pre-commit-env\Scripts\activate.bat
+```
+
 And on linux make the files executable using 
 
 ```

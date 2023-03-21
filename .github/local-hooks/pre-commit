@@ -7,7 +7,7 @@ python -m venv pre-commit-env
 source pre-commit-env/Scripts/activate
 
 # install the pinned version of black if needed
-pip install click=8.0.2
+pip install click==8.0.2
 pip install black==21.12b0
 python -m black .
 

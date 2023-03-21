@@ -6,7 +6,7 @@ print("throttle over")
 print("orbit burn")
 print("radio silence")
 print("land")
-print("retrieve crew"      )
+print("retrieve crew")
 
 
 from sub1 import *

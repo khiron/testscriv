@@ -6,6 +6,11 @@ To install hooks in this folder into your .git, run the following command from t
 git config core.hooksPath .github/local-hooks
 ```
 
+To remove the hook use 
+```
+git config --unset core.hooksPath
+```
+
 # Linting 
 
 This will ensure that before every commit Black is run to format the code and ISort is run to sort the imports using the project pinned versions of Black and ISort.

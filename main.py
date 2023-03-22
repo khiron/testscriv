@@ -2,11 +2,11 @@ print("ignition")
 print("combustion")
 print("launch")
 print("max Q")
-print(      "throttle over")
+print("throttle over")
 print("orbit burn")
-print(     "radio silence")
-print("land"  )
-print("retrieve crew" , sep = " "    )
+print("radio silence")
+print("land")
+print("retrieve crew", sep=" ")
 
 
 from sub1 import *

@@ -28,7 +28,7 @@ jobs:
           import requests
 
           # Create a PyGithub object using the personal access token
-          repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+          g = Github(os.environ["GITHUB_TOKEN"])
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])

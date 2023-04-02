@@ -28,6 +28,7 @@ jobs:
           import json
           from github import Github
 
+          print("responding to a change in an issue label")
           # Create a PyGithub object using the GitHub access token
           g = Github(os.environ["GITHUB_TOKEN"])
 
@@ -40,6 +41,7 @@ jobs:
           if os.path.exists(event_path):
               with open(event_path, "r") as f:
                   event = json.load(f)
+          print(event)
 
           # Check if the event corresponds to an issue that has a corresponding pull request
           if "issue" in event and "pull_request" in event["issue"]:
@@ -60,5 +62,5 @@ jobs:
                   pull.add_to_labels("needs-documentation")
 
                   # Log a message indicating that the 'needs-documentation' label was applied to the pull request
-                  print(f"Applied 'needs-documentation' label to pull request #{pull_number}.")
+                  print(f"Applied 'needs-documentation' label to pull request #{pull_number} (issue #{issue.number}).")
           EOF

@@ -35,7 +35,7 @@ jobs:
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
           # Get the pull request object for the merged pull request
-          pull_number = os.environ["GITHUB_REF"].split("/")[-1]
+          pull_number = os.environ["GITHUB_REF"]
           pull = repo.get_pull(int(pull_number))
 
           # Check if the pull request has the 'needs-documentation' label

@@ -25,6 +25,7 @@ jobs:
         run: |
           python - <<EOF
           import os
+          import json
           from github import Github
 
           # Create a PyGithub object using the GitHub access token

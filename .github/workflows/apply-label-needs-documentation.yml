@@ -1,4 +1,4 @@
-name: Apply 'needs-documentation' Label to Pull Request
+name: Apply 'documentation-needed' Label to Pull Request
 
 on:
   issues:
@@ -16,21 +16,19 @@ jobs:
       - name: Install PyGithub
         run: pip install PyGithub
 
-      # Apply the 'needs-documentation' label to the pull request if the corresponding issue has the same label
-      - name: Apply 'needs-documentation' Label to Pull Request
+      # Apply the 'documentation-needed' label to the pull request(s) if the corresponding issue has the same label
+      - name: Apply 'documentation-needed' Label to Pull Request(s)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # This step applies the 'needs-documentation' label to a pull request if the corresponding issue has the same label.
-        # This helps ensure that documentation is created for changes to the code.
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           python - <<EOF
           import os
           import json
           from github import Github
+          import requests
 
-          print("responding to a change in an issue label")
-          # Create a PyGithub object using the GitHub access token
-          g = Github(os.environ["GITHUB_TOKEN"])
+          # Create a PyGithub object using the personal access token
+          g = Github(os.environ["PERSONAL_ACCESS_TOKEN"])
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
@@ -44,22 +42,36 @@ jobs:
 
           # Check if the event corresponds to an issue
           if "issue" in event:
-              print("event corresponds to an issue")
 
               # Get the issue object for the current issue
-              issue = repo.get_issue(event["issue"]["number"])
-              print(f"issue number: {issue.number}")
+              try:
+                  issue = repo.get_issue(event["issue"]["number"])
+              except Exception as e:
+                  print(f"Error retrieving issue #{event['issue']['number']}: {e}")
+                  response = requests.get(event['issue']['url'], headers={'Authorization': f'Bearer {os.environ["PERSONAL_ACCESS_TOKEN"]}'})
+                  if response.ok:
+                      print(f"Retrieved issue #{event['issue']['number']} using API directly")
+                      issue = response.json()
+                      issue = g.get_issue(issue["number"])
+                  else:
+                      print(f"Error retrieving issue #{event['issue']['number']} using API directly: {response.status_code} {response.reason}")
+                      issue = None
 
-              # Check if the issue has the 'documentation-needed' label
-              if "documentation-needed" in [label.name for label in issue.labels]:
-                  print("issue has the 'documentation-needed' label")
+              if issue:
+                  # Check if the issue has the 'documentation-needed' label
+                  if "documentation-needed" in [label.name for label in issue.labels]:
 
-                  # Get the pull requests associated with the issue
-                  pull_requests = issue.get_pulls()
-                  print(f"pull requests associated with issue: {[pull.number for pull in pull_requests]}")
+                      # Get the pull requests associated with the issue
+                      pull_requests = issue.get_pulls()
 
-                  # Apply the 'documentation-needed' label to each pull request
-                  for pull in pull_requests:
-                      pull.add_to_labels("documentation-needed")
-                      print(f"Applied 'documentation-needed' label to pull request #{pull.number} (issue #{issue.number}).")
+                      # Apply the 'documentation-needed' label to each pull request
+                      for pull in pull_requests:
+                          pull.add_to_labels("documentation-needed")
+                          print(f"Applied 'documentation-needed' label to pull request #{pull.number}")
+                  else:
+                      print(f"Issue #{issue.number} does not have 'documentation-needed' label")
+              else:
+                  print(f"Unable to retrieve issue #{event['issue']['number']}")
+          else:
+              print("Event does not correspond to an issue")
           EOF

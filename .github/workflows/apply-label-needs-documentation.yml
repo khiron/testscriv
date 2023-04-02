@@ -27,6 +27,9 @@ jobs:
           from github import Github
           import requests
 
+          print("A label has changed on an issue - check if the issue needs-documentation")
+          print(os.environ["PERSONAL_ACCESS_TOKEN"])
+
           # Create a PyGithub object using the personal access token
           g = Github(os.environ["PERSONAL_ACCESS_TOKEN"])
 

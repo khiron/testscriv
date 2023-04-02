@@ -27,7 +27,7 @@ jobs:
           from github import Github
           import requests
 
-          # Create a PyGithub object using the personal access token
+          # Create a PyGithub object using the GITHUB_TOKEN
           g = Github(os.environ["GITHUB_TOKEN"])
 
           # Get the repository object for the current repository
@@ -48,7 +48,7 @@ jobs:
                   issue = repo.get_issue(event["issue"]["number"])
               except Exception as e:
                   print(f"Error retrieving issue #{event['issue']['number']}: {e}")
-                  response = requests.get(event['issue']['url'], headers={'Authorization': f'Bearer {os.environ["PERSONAL_ACCESS_TOKEN"]}'})
+                  response = requests.get(event['issue']['url'], headers={'Authorization': f'Bearer {os.environ["GITHUB_TOKEN"]}'})
                   if response.ok:
                       print(f"Retrieved issue #{event['issue']['number']} using API directly")
                       issue = response.json()

@@ -19,7 +19,7 @@ jobs:
       # Apply the 'needs-documentation' label to any associated pull requests if the issue has the 'needs-documentation' label
       - name: Apply 'needs-documentation' Label to Associated Pull Requests
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.workflow-apply-label }}
         run: |
           python - <<EOF
           import os
@@ -27,7 +27,7 @@ jobs:
           from github import Github
 
           # Create a PyGithub object using the GITHUB_TOKEN
-          g = Github(os.environ["GITHUB_TOKEN"])
+          g = Github(os.environ["PERSONAL_ACCESS_TOKEN"])
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])

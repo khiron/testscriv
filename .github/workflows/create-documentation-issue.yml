@@ -1,0 +1,51 @@
+name: Create Documentation Issue
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      # Set up Python 3.8 and install PyGithub
+      - name: Set up Python and Install Dependencies
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install PyGithub
+        run: pip install PyGithub
+
+      # Create a new issue tagged with 'documentation' if the merged pull request has the 'needs-documentation' label
+      - name: Create Documentation Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # This step creates a new issue tagged with 'documentation' if the merged pull request has the 'needs-documentation' label.
+        # This helps ensure that changes to the code are properly documented.
+        run: |
+          python - <<EOF
+          import os
+          from github import Github
+
+          # Create a PyGithub object using the GitHub access token
+          g = Github(os.environ["GITHUB_TOKEN"])
+
+          # Get the repository object for the current repository
+          repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+
+          # Get the pull request object for the merged pull request
+          pull_number = os.environ["GITHUB_REF"].split("/")[-1]
+          pull = repo.get_pull(int(pull_number))
+
+          # Check if the pull request has the 'needs-documentation' label
+          if "needs-documentation" in [label.name for label in pull.labels]:
+
+              # Create a new issue object and add the 'documentation' label to it
+              issue_title = f"Create documentation for changes in #{pull_number}"
+              issue_body = f"The changes proposed in pull request #{pull_number} require documentation. Please create documentation for the changes made in this pull request."
+              new_issue = repo.create_issue(title=issue_title, body=issue_body, labels=["documentation"])
+
+              # Log a message indicating that an issue was created for the merged pull request
+              print(f"Created documentation issue for pull request #{pull_number}.")
+          EOF

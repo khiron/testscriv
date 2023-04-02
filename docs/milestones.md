@@ -1,8 +1,8 @@
 ## Milestones
+# April Release
 
 ```mermaid
 timeline
-title Cogent 3 April Release
 
 section Cogent3
 TBA : estimate genetic distance from unaligned sequences
@@ -18,17 +18,18 @@ section IQTree
 Minh 
 
 section Graphbin 
-Vajini 
+Vijini 
 : Convert GraphBin to use click 
 : Organise common code in `GraphBin` to be able to reuse in the merger 
 : Make new release on both conda / PyPI 
 : Add CZI logo to repositories
 ```
+---
+
+# August Release
     
 ```mermaid
 timeline
-title Cogent 3 August Release
-
 section Cogent3
 TBA 
 Gavin 
@@ -47,7 +48,7 @@ Richard
 
 
 section Graphbin 
-Vajini 
+Vijini 
 : Convert `GraphBin2` to use `click`
 : Make `GraphBin2` pip installable
 : Organise common code in `GraphBin2` to be able to reuse in the merger
@@ -59,9 +60,9 @@ Vajini
 
 ```
 ---    
+# December Release
 ```mermaid
 timeline
-title Cogent 3 December Release
 section Cogent3
 TBA : TBD
 Gavin : TBD
@@ -73,7 +74,7 @@ section IQTree
 Minh : TBD
 
 section Graphbin 
-Vajini : Modify `GraphBin` to support treatment of multi-samples. Define API for usage of `GraphBin` as library. Update documentation, make release.
+Vijini : Modify `GraphBin` to support treatment of multi-samples. Define API for usage of `GraphBin` as library. Update documentation, make release.
 : Merger of `MetaCoAG` and `GraphBin2` binning tools into `GraphBin`. 
 : Extend documentation and advertise merger of capabilities.
 : Make under a new repository as `GraphBin Toolkit`
@@ -81,10 +82,9 @@ Vajini : Modify `GraphBin` to support treatment of multi-samples. Define API for
 : Advertise in public forums
 ```
 ---    
+# Cogent 3 2024
 ```mermaid
 timeline
-title Cogent 3 Future
-
 section Cogent3
 TBA 
 : Interconversion of `cogent3` and `IQ-TREE` primary data types 
@@ -102,11 +102,8 @@ Richard
 : Create first draft Cogent3 plug-in version of the click application
 
 section Graphbin 
-Vajini 
+Vijini 
 Richard
 : Create first draft of Cogent3 plug-in version of Graphbin
 ```
 ---
-
-
-https://mermaid.js.org/syntax/examples.html

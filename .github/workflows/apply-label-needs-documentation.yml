@@ -36,54 +36,30 @@ jobs:
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
-          print("test get repo issue")
-          issue = repo.get_issue(1)
-          print(issue)
+          issue_number = os.environ["ISSUE_NUMBER"]
+          print("issue number: " + issue_number)
 
           print("test get pulls")
-          pull_requests = issue.get_pulls()
+          pull_requests = repo.get_pulls(state="open", sort="created", base=issue_number)
           print(pull_requests)
 
 
-          # Load the event payload from the GITHUB_EVENT_PATH environment variable
-          event_path = os.environ["GITHUB_EVENT_PATH"]
-          event = {}
-          if os.path.exists(event_path):
-              with open(event_path, "r") as f:
-                  event = json.load(f)
+          # Get the issue object for the merged pull request
+          issue_number = os.environ["ISSUE_NUMBER"]
+          issue = repo.get_issue(int(issue_number))
 
-          # Check if the event corresponds to an issue
-          if "issue" in event:
+          # Check if the issue has the 'documentation-needed' label
+          if "documentation-needed" in [label.name for label in issue.labels]:
 
-              # Get the issue object for the current issue
-              try:
-                  issue = repo.get_issue(event["issue"]["number"])
-              except Exception as e:
-                  print(f"Error retrieving issue #{event['issue']['number']}: {e}")
-                  response = requests.get(event['issue']['url'], headers={'Authorization': f'Bearer {os.environ["PERSONAL_ACCESS_TOKEN"]}'})
-                  if response.ok:
-                      print(f"Retrieved issue #{event['issue']['number']} using API directly")
-                      issue = response.json()
-                      issue = g.get_issue(issue["number"])
-                  else:
-                      print(f"Error retrieving issue #{event['issue']['number']} using API directly: {response.status_code} {response.reason}")
-                      issue = None
+              # Get the repository object for the current repository
+              repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
-              if issue:
-                  # Check if the issue has the 'documentation-needed' label
-                  if "documentation-needed" in [label.name for label in issue.labels]:
+              # Get the pull requests associated with the issue
+              pull_requests = repo.get_pulls(state="open", sort="created", base=issue_number)
 
-                      # Get the pull requests associated with the issue
-                      pull_requests = issue.get_pulls()
-
-                      # Apply the 'documentation-needed' label to each pull request
-                      for pull in pull_requests:
-                          pull.add_to_labels("documentation-needed")
-                          print(f"Applied 'documentation-needed' label to pull request #{pull.number}")
-                  else:
-                      print(f"Issue #{issue.number} does not have 'documentation-needed' label")
-              else:
-                  print(f"Unable to retrieve issue #{event['issue']['number']}")
+              # Apply the 'documentation-needed' label to each pull request
+              for pull in pull_requests:
+                  pull.add_to_labels("documentation-needed")
+                  print(f"Applied 'documentation-needed' label to pull request #{pull.number}")
           else:
-              print("Event does not correspond to an issue")
-          EOF
+              print(f"Issue #{issue.number} does not have 'documentation-needed' label")

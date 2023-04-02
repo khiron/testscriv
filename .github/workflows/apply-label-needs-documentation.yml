@@ -43,6 +43,16 @@ jobs:
                   event = json.load(f)
           print(event)
 
+          if "issue" in event:
+            print("issue in event")
+          else:
+            print("issue not in event")
+
+          if "pull_request" in event["issue"]:
+            print("pull_request in event[issue]")
+          else:
+            print("pull_request not in event[issue]")
+
           # Check if the event corresponds to an issue that has a corresponding pull request
           if "issue" in event and "pull_request" in event["issue"]:
 

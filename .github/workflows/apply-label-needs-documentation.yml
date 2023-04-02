@@ -34,6 +34,15 @@ jobs:
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
+          print("test get repo issue")
+          issue = repo.get_issue(1)
+          print(issue)
+
+          print("test get pulls")
+          pull_requests = issue.get_pulls()
+          print(pull_requests)
+
+
           # Load the event payload from the GITHUB_EVENT_PATH environment variable
           event_path = os.environ["GITHUB_EVENT_PATH"]
           event = {}

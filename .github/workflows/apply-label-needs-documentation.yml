@@ -41,36 +41,21 @@ jobs:
           if os.path.exists(event_path):
               with open(event_path, "r") as f:
                   event = json.load(f)
-          print(event)
 
+          # Check if the event corresponds to an issue
           if "issue" in event:
-            print("issue in event")
-          else:
-            print("issue not in event")
-
-          if "pull_request" in event["issue"]:
-            print("pull_request in event[issue]")
-          else:
-            print("pull_request not in event[issue]")
-
-          # Check if the event corresponds to an issue that has a corresponding pull request
-          if "issue" in event and "pull_request" in event["issue"]:
 
               # Get the issue object for the current issue
               issue = repo.get_issue(event["issue"]["number"])
 
-              # Check if the issue has the 'needs-documentation' label
-              if "needs-documentation" in [label.name for label in issue.labels]:
+              # Check if the issue has the 'documentation-needed' label
+              if "documentation-needed" in [label.name for label in issue.labels]:
 
-                  # Get the pull request number from the event payload
-                  pull_number = event["issue"]["pull_request"]["url"].split("/")[-1]
+                  # Get the pull requests associated with the issue
+                  pull_requests = issue.get_pulls()
 
-                  # Get the pull request object for the current pull request
-                  pull = repo.get_pull(int(pull_number))
-
-                  # Apply the 'needs-documentation' label to the pull request
-                  pull.add_to_labels("needs-documentation")
-
-                  # Log a message indicating that the 'needs-documentation' label was applied to the pull request
-                  print(f"Applied 'needs-documentation' label to pull request #{pull_number} (issue #{issue.number}).")
+                  # Apply the 'documentation-needed' label to each pull request
+                  for pull in pull_requests:
+                      pull.add_to_labels("documentation-needed")
+                      print(f"Applied 'documentation-needed' label to pull request #{pull.number} (issue #{issue.number}).")
           EOF

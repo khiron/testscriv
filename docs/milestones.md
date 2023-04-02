@@ -5,14 +5,29 @@
 timeline
 
 section Cogent3
-TBA : estimate genetic distance from unaligned sequences
+TBA 
+: estimate genetic distance from unaligned sequences
 : add Lin-Rajan-Moret tree distance metric
-: refactor cogent3.parse.genbank.Location to be PEP8 compliant
-Gavin : Annotation refactor design : A db API for handling annotations: Annotation refactor design : refactor genbank coordinate handling objects
-Kath : SeqView changing operations on Sequences to act as views until necessary
-Robert : rename TreeAlign
-Richard : Update docs to include new capabilities, e.g. the Lin-Rajan-Moret distance: Update docs for the handling of sequence annotations 
+: refactor parse.genbank.Location to be PEP8 compliant
+: Update docs to include new capabilities, e.g. the Lin-Rajan-Moret distance
+: Update docs for the handling of sequence annotations 
+: rename TreeAlign
+Gavin 
+: Annotation refactor design 
+: A db API for handling annotations
+: Annotation refactor design 
+: refactor genbank coordinate handling objects
+Kath 
+: SeqView changing operations on Sequences to act as views until necessary
 
+Richard 
+: submit cogent3 to Biocondor
+
+Unassigned 
+: Nabi 
+: Yapeng 
+: Robert 
+: Stephen
 
 section IQTree
 Minh 
@@ -21,7 +36,7 @@ section Graphbin
 Vijini 
 : Convert GraphBin to use click 
 : Organise common code in `GraphBin` to be able to reuse in the merger 
-: Make new release on both conda / PyPI 
+: Make new release on both conda & PyPI 
 : Add CZI logo to repositories
 ```
 ---
@@ -32,19 +47,15 @@ Vijini
 timeline
 section Cogent3
 TBA 
-Gavin 
-Kath 
-Robert 
 Richard 
 : plug-in draft architecture 
 : 3 sample plug-in trivial projects for input/algorithm/output plugs 
+: Sample harness for verifying a plug-in 
 
 section IQTree
 Minh 
 : Convert `IQ-TREE` to a `click` based CLI
 : Modify the `IQ-TREE` build process to produce binaries using `scipy-build` and `shiv`. 
-Richard
-: Sample harness for verifying a plug-in section IQTree
 
 
 section Graphbin 
@@ -64,11 +75,11 @@ Vijini
 ```mermaid
 timeline
 section Cogent3
-TBA : TBD
-Gavin : TBD
-Kath : TBD
-Robert : TBD
-Richard : TBD
+TBA  
+: Write extension plugin for `GraphBin`
+: Write extension plugin for `IQ-TREE` 
+: Write extension plugin for `ETE3`. 
+: Update documentation to describe the plug-in architecture
 
 section IQTree
 Minh : TBD
@@ -88,22 +99,19 @@ timeline
 section Cogent3
 TBA 
 : Interconversion of `cogent3` and `IQ-TREE` primary data types 
-: Extend `cogent3` model grammar to include Lie-Markov models. Update documentation and make release. (origin CZ grant)
-: Implement `cogent3` hooks for phylogeny reconstruction (invoking the `iqtree` extension), phylogeny 23 / 48 visualisation (invoking the `ete3` extension) and sequence annotation (invoking the SQLite annotation extension).
+: Extend `cogent3` model grammar to include Lie-Markov models. Update documentation and make release. 
+: `cogent3` hooks for phylogeny reconstruction : `cogent3` hooks for phylogeny 23 / 48 visualisation : `cogent3` hooks for sequence annotation
 
-Gavin 
-Kath 
-Robert 
-Richard 
 
 section IQTree
 Minh 
-Richard
 : Create first draft Cogent3 plug-in version of the click application
+: Release IQ-TREE as a Cogent3 plug-in
 
 section Graphbin 
 Vijini 
-Richard
 : Create first draft of Cogent3 plug-in version of Graphbin
+: Release Graphbin as a Cogent3 plug-in
+```
 ```
 ---

@@ -61,7 +61,7 @@ To release a version of the project, run
 scriv release
 ```
 
-This will create a new tag in the git repository, and create a new release on github.  The release will contain the full changelog for the project, and the tag will be annotated with the full changelog as well.  Note you will need to have a github classic personal access token set up in your environment (GITHUB_TOKEN) for this to work. 
+This will create a new tag in the git repository, and create a new release on github.  The release will contain the full changelog for the project, and the tag will be annotated with the full changelog as well.  Note you will need to have a github classic personal access token set up in your environment (GITHUB_TOKEN) for this to work (Go to github profile settings/<Developer settings>). 
 
 If you are using VS code and powershell you can add the following to your settings.json file to set the environment variable for the terminal.  If you are using a different terminal you will need to set the environment variable in the appropriate way for your terminal.
 

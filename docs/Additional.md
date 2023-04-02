@@ -69,21 +69,3 @@ gantt
 
 ```
 ---
-```mermaid
-mindmap
-  root((April 2023 Release))
-    Origins
-      Long history
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectivness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```

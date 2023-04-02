@@ -1,4 +1,28 @@
 
+<a id='changelog-0.0.6'></a>
+# Changes since release 0.0.6
+
+## DOC
+
+- Update milestones
+
+<a id='changelog-0.0.5'></a>
+# Changes since release 0.0.5
+
+## Contributers
+
+- Richard Morris
+
+- Richard Morris
+
+## ENH
+
+- Add pre-commit hooks to the project
+
+## DOC
+
+- Update milestones
+
 <a id='changelog-0.0.4'></a>
 # Changes since release 0.0.4
 

@@ -44,15 +44,19 @@ jobs:
 
           # Check if the event corresponds to an issue
           if "issue" in event:
+              print("event corresponds to an issue")
 
               # Get the issue object for the current issue
               issue = repo.get_issue(event["issue"]["number"])
+              print(f"issue number: {issue.number}")
 
               # Check if the issue has the 'documentation-needed' label
               if "documentation-needed" in [label.name for label in issue.labels]:
+                  print("issue has the 'documentation-needed' label")
 
                   # Get the pull requests associated with the issue
                   pull_requests = issue.get_pulls()
+                  print(f"pull requests associated with issue: {[pull.number for pull in pull_requests]}")
 
                   # Apply the 'documentation-needed' label to each pull request
                   for pull in pull_requests:

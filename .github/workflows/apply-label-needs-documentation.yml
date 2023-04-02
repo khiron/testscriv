@@ -28,7 +28,6 @@ jobs:
           import requests
 
           print("A label has changed on an issue - check if the issue needs-documentation")
-          print(os.environ["PERSONAL_ACCESS_TOKEN"])
 
           # Create a PyGithub object using the personal access token
           g = Github(os.environ["PERSONAL_ACCESS_TOKEN"])
@@ -39,10 +38,12 @@ jobs:
           issue_number = os.environ["ISSUE_NUMBER"]
           print("issue number: " + issue_number)
 
+          issue = repo.get_issue(int(issue_number))
+          print("issue: " + str(issue))
+
           print("test get pulls")
           pull_requests = repo.get_pulls(state="open", sort="created", base=issue_number)
           print(pull_requests)
-
 
           # Get the issue object for the merged pull request
           issue_number = os.environ["ISSUE_NUMBER"]

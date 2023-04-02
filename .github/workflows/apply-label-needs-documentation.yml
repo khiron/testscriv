@@ -19,7 +19,7 @@ jobs:
       # Apply the 'needs-documentation' label to any associated pull requests if the issue has the 'needs-documentation' label
       - name: Apply 'needs-documentation' Label to Associated Pull Requests
         env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.workflow-apply-label }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.WORKFLOW_APPLY_LABEL }}
         run: |
           python - <<EOF
           import os

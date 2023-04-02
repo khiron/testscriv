@@ -1,4 +1,4 @@
-name: Apply 'documentation-needed' Label to Pull Request
+name: Add 'needs-documentation' Label to Associated Pull Requests
 
 on:
   issues:
@@ -16,51 +16,44 @@ jobs:
       - name: Install PyGithub
         run: pip install PyGithub
 
-      # Apply the 'documentation-needed' label to the pull request(s) if the corresponding issue has the same label
-      - name: Apply 'documentation-needed' Label to Pull Request(s)
+      # Apply the 'needs-documentation' label to any associated pull requests if the issue has the 'needs-documentation' label
+      - name: Apply 'needs-documentation' Label to Associated Pull Requests
         env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.workflow_apply_label }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python - <<EOF
           import os
-          import json
           from github import Github
-          import requests
 
-          print("A label has changed on an issue - check if the issue needs-documentation")
-
-          # Create a PyGithub object using the personal access token
-          g = Github(os.environ["PERSONAL_ACCESS_TOKEN"])
+          # Create a PyGithub object using the GITHUB_TOKEN
+          g = Github(os.environ["GITHUB_TOKEN"])
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
 
-          issue_number = os.environ["ISSUE_NUMBER"]
-          print("issue number: " + issue_number)
+          # Load the event payload from the GITHUB_EVENT_PATH environment variable
+          event_path = os.environ["GITHUB_EVENT_PATH"]
+          event = {}
+          if os.path.exists(event_path):
+              with open(event_path, "r") as f:
+                  event = json.load(f)
 
-          issue = repo.get_issue(int(issue_number))
-          print("issue: " + str(issue))
+          # Check if the event corresponds to an issue
+          if "issue" in event:
+              issue_number = event["issue"]["number"]
 
-          print("test get pulls")
-          pull_requests = repo.get_pulls(state="open", sort="created", base=issue_number)
-          print(pull_requests)
+              # Check if the issue has the 'needs-documentation' label
+              if "needs-documentation" in [label.name for label in repo.get_issue(issue_number).labels]:
 
-          # Get the issue object for the merged pull request
-          issue_number = os.environ["ISSUE_NUMBER"]
-          issue = repo.get_issue(int(issue_number))
-
-          # Check if the issue has the 'documentation-needed' label
-          if "documentation-needed" in [label.name for label in issue.labels]:
-
-              # Get the repository object for the current repository
-              repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
-
-              # Get the pull requests associated with the issue
-              pull_requests = repo.get_pulls(state="open", sort="created", base=issue_number)
-
-              # Apply the 'documentation-needed' label to each pull request
-              for pull in pull_requests:
-                  pull.add_to_labels("documentation-needed")
-                  print(f"Applied 'documentation-needed' label to pull request #{pull.number}")
+                  # Get the pull requests associated with the issue
+                  pull_requests = repo.get_pulls(state="open", sort="created", direction="desc")
+                  for pull in pull_requests:
+                      if issue_number in [issue.number for issue in pull.get_issues()]:
+                          # Apply the 'needs-documentation' label to the pull request
+                          pull.add_to_labels("needs-documentation")
+                          print(f"Applied 'needs-documentation' label to pull request #{pull.number}")
+              else:
+                  print(f"Issue #{issue_number} does not have 'needs-documentation' label")
           else:
-              print(f"Issue #{issue.number} does not have 'documentation-needed' label")
+              print("Event does not correspond to an issue")
+          EOF

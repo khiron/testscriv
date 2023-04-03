@@ -38,7 +38,7 @@ jobs:
           print(issue)
 
           print("test get pulls")
-          pull_requests = issue.get_pulls()
+          pull_requests = issue.get_pull()
           print(pull_requests)
 
 
@@ -57,7 +57,7 @@ jobs:
               if "needs-documentation" in [label.name for label in repo.get_issue(issue_number).labels]:
 
                   # Get the pull requests associated with the issue
-                  pull_requests = repo.get_pulls(state="open", sort="created", direction="desc")
+                  pull_requests = repo.get_pull(state="open", sort="created", direction="desc")
                   for pull in pull_requests:
                       # Apply the 'needs-documentation' label to the pull request
                       print(f"Adding 'needs-documentation' label to pull request #{pull.number}")

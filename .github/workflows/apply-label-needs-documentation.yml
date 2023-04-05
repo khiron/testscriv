@@ -1,0 +1,69 @@
+name: Add 'needs-documentation' Label to Associated Pull Requests
+
+on:
+  issues:
+    types: [labeled, unlabeled]
+
+jobs:
+  apply_label:
+    runs-on: ubuntu-latest
+    steps:
+      # Set up Python 3.8 and install PyGithub
+      - name: Set up Python and Install Dependencies
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install PyGithub
+        run: pip install PyGithub
+
+      # Apply the 'needs-documentation' label to any associated pull requests if the issue has the 'needs-documentation' label
+      - name: Apply 'needs-documentation' Label to Associated Pull Requests
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.WORKFLOW_APPLY_LABEL }}
+        run: |
+          python - <<EOF
+          import os
+          import json
+          from github import Github
+
+          # Create a PyGithub object using the GITHUB_TOKEN
+          secret = os.environ["PERSONAL_ACCESS_TOKEN"]
+          g = Github(secret)
+
+          # Get the repository object for the current repository
+          repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+
+          print("test get repo issue")
+          issue = repo.get_issue(1)
+          print(issue)
+
+          print("test get pulls")
+          pull_requests = issue.get_pull()
+          print(pull_requests)
+
+
+          # Load the event payload from the GITHUB_EVENT_PATH environment variable
+          event_path = os.environ["GITHUB_EVENT_PATH"]
+          event = {}
+          if os.path.exists(event_path):
+              with open(event_path, "r") as f:
+                  event = json.load(f)
+
+          # Check if the event corresponds to an issue
+          if "issue" in event:
+              issue_number = event["issue"]["number"]
+
+              # Check if the issue has the 'needs-documentation' label
+              if "needs-documentation" in [label.name for label in repo.get_issue(issue_number).labels]:
+
+                  # Get the pull requests associated with the issue
+                  pull_requests = repo.get_pull(state="open", sort="created", direction="desc")
+                  for pull in pull_requests:
+                      # Apply the 'needs-documentation' label to the pull request
+                      print(f"Adding 'needs-documentation' label to pull request #{pull.number}")
+                      pull.add_to_labels("needs-documentation")
+              else:
+                  print(f"Issue #{issue_number} does not have 'needs-documentation' label")
+          else:
+              print("Event does not correspond to an issue")
+          EOF

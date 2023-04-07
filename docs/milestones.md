@@ -7,21 +7,24 @@ timeline
 section Cogent3
 TBA 
 : estimate genetic distance from unaligned sequences
-: add Lin-Rajan-Moret tree distance metric
 : refactor parse.genbank.Location to be PEP8 compliant
 : Update docs to include new capabilities, e.g. the Lin-Rajan-Moret distance
 : Update docs for the handling of sequence annotations 
 : rename TreeAlign
 Gavin 
 : Annotation refactor design 
+: change type argument to biotype in annotations
 : A db API for handling annotations
 : Annotation refactor design 
 : refactor genbank coordinate handling objects
 Kath 
 : SeqView changing operations on Sequences to act as views until necessary
 
+Robert 
+: add Lin-Rajan-Moret tree distance metric
+
 Richard 
-: submit cogent3 to Biocondor
+: submit cogent3 to Bioconda
 
 Unassigned 
 : Nabi 
@@ -40,6 +43,7 @@ Vijini
 : Add CZI logo to repositories
 ```
 ---
+
 
 # August Release
     

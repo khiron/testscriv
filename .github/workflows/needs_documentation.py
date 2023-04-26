@@ -2,6 +2,8 @@ import os
 import json
 from github import Github
 
+print("Creating documentation issue...")
+
 # Load the JSON payload of the event
 with open(os.environ["GITHUB_EVENT_PATH"], "r") as f:
     event_data = json.load(f)
@@ -10,6 +12,7 @@ with open(os.environ["GITHUB_EVENT_PATH"], "r") as f:
 pull_number = event_data["pull_request"]["number"]
 print(f"Pull request number: {pull_number}")
 
+      
 # Create a PyGithub object using the GitHub access token
 g = Github(os.environ["GITHUB_TOKEN"])
 

@@ -9,10 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout script
+        uses: Bhacaz/checkout-files@v2
         with:
-          ref: master
+          files: /.github/workflows/needs_documentation.py
+          branch: master
       - name: Set up Python and Install Dependencies
         uses: actions/setup-python@v2
         with:

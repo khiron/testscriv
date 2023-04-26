@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref: master
       - name: Set up Python and Install Dependencies
         uses: actions/setup-python@v2
         with:

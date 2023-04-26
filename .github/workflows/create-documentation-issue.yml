@@ -33,6 +33,9 @@ jobs:
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
+          
+          env = os.environ["GITHUB_REF"]
+          print(f"Environment: {env}")
 
           env = os.environ["GITHUB_REF"]
           print(f"Environment: {env}")

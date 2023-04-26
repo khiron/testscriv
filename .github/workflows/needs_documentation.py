@@ -3,6 +3,8 @@ import json
 from github import Github
 
 print("Creating documentation issue...")
+__version__ = "0.0.1"
+print(f"Version: {__version__}")
 
 # Load the JSON payload of the event
 with open(os.environ["GITHUB_EVENT_PATH"], "r") as f:

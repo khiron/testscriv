@@ -26,20 +26,24 @@ jobs:
         run: |
           python - <<EOF
           import os
+          import json
           from github import Github
+
+          # Load the JSON payload of the event
+          with open(os.environ["GITHUB_EVENT_PATH"], "r") as f:
+              event_data = json.load(f)
+
+          # Get the pull request number from the event payload
+          pull_number = event_data["pull_request"]["number"]
+          print(f"Pull request number: {pull_number}")
 
           # Create a PyGithub object using the GitHub access token
           g = Github(os.environ["GITHUB_TOKEN"])
 
           # Get the repository object for the current repository
           repo = g.get_repo(os.environ["GITHUB_REPOSITORY"])
-          
-          env = os.environ["GITHUB_REF"]
-          print(f"Environment: {env}")
 
           # Get the pull request object for the merged pull request
-          pull_number = os.environ["GITHUB_REF"].split("/")[-1]
-          print(f"Pull request number: {pull_number}")
           pull = repo.get_pull(int(pull_number))
 
           # Check if the pull request has the 'needs-documentation' label

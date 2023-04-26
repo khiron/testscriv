@@ -1,4 +1,16 @@
 
+<a id='changelog-0.0.7'></a>
+# Changes since release 0.0.7
+
+## Contributers
+
+- Richard Morris
+
+## BUG
+
+- A sneaky bug that caused the project to crash when a user did X
+  by doing Y instead
+
 <a id='changelog-0.0.6'></a>
 # Changes since release 0.0.6
 

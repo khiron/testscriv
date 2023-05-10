@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sac c310dev
+conda activate c310dev
 black .
 isort .
 

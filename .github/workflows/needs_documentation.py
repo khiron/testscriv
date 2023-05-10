@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 from github import Github
 
 print("Creating documentation issue...")
@@ -14,7 +15,7 @@ with open(os.environ["GITHUB_EVENT_PATH"], "r") as f:
 pull_number = event_data["pull_request"]["number"]
 print(f"Pull request number: {pull_number}")
 
-      
+
 # Create a PyGithub object using the GitHub access token
 g = Github(os.environ["GITHUB_TOKEN"])
 
@@ -30,7 +31,9 @@ if "needs-documentation" in [label.name for label in pull.labels]:
     # Create a new issue object and add the 'documentation' label to it
     issue_title = f"Create documentation for changes in #{pull_number}"
     issue_body = f"The changes proposed in pull request #{pull_number} require documentation. Please create documentation for the changes made in this pull request."
-    new_issue = repo.create_issue(title=issue_title, body=issue_body, labels=["documentation"])
+    new_issue = repo.create_issue(
+        title=issue_title, body=issue_body, labels=["documentation"]
+    )
 
     # Log a message indicating that an issue was created for the merged pull request
     print(f"Created documentation issue for pull request #{pull_number}.")
